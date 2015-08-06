@@ -47,12 +47,11 @@ func (conn SplunkConnection) SendMessage(message *Message) (string, error) {
 }
 
 
-func (conn SplunkConnection) GetMessage(name string) ([]Message, error) {
+func (conn SplunkConnection) GetMessages(name string) ([]Message, error) {
         data := make(url.Values)
         data.Add("name", name)
         data.Add("output_mode", "json")
         response, err := conn.httpGet(fmt.Sprintf("%s/services/messages/%s", conn.BaseURL, name), &data)
-
         if err != nil {
                 return []Message{}, err
         }

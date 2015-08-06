@@ -38,7 +38,8 @@ func (conn SplunkConnection) httpCall(url string, method string, data *url.Value
           payload = bytes.NewBufferString(data.Encode())
         }
 
-        request, err := http.NewRequest("POST", url, payload)
+        request, err := http.NewRequest(method, url, payload)
+
         conn.addAuthHeader(request)
         response, err := client.Do(request)
 
